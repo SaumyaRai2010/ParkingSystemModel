@@ -6,10 +6,20 @@ public class ParkingVehicle {
     private String vehicleNumber;
     private LocalDateTime start;
     private LocalDateTime end;
+    private String vehicleType;
 
-    public ParkingVehicle(String vehicleNumber, LocalDateTime start) {
+    public ParkingVehicle(String vehicleNumber, LocalDateTime start, String vehicleType) {
         this.vehicleNumber = vehicleNumber;
         this.start = start;
+        this.vehicleType=vehicleType;
+    }
+
+    public String getVehicleType() {
+        return vehicleType;
+    }
+
+    public void setVehicleType(String vehicleType) {
+        this.vehicleType = vehicleType;
     }
 
     public String getVehicleNumber() {

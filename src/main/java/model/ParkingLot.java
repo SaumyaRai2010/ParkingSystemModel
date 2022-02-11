@@ -1,20 +1,24 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class ParkingLot {
-    private List<ParkingVehicle> parkingVehicleList;
+//    private List<List<ParkingVehicle>> parkingVehicleList;
+    private Map<String,ParkingVehicle> parkingVehicleMap;
 
     public ParkingLot() {
-        this.parkingVehicleList = new ArrayList<>();
-    }
-    public List<ParkingVehicle> getParkingVehicleList() {
-        return parkingVehicleList;
+        this.parkingVehicleMap = new HashMap<String,ParkingVehicle>();
     }
 
-    public void setParkingVehicleList(List<ParkingVehicle> parkingVehicleList) {
-        this.parkingVehicleList = parkingVehicleList;
+    public Map<String, ParkingVehicle> getParkingVehicleMap() {
+        return parkingVehicleMap;
+    }
+
+    public void setParkingVehicleMap(Map<String, ParkingVehicle> parkingVehicleMap) {
+        this.parkingVehicleMap = parkingVehicleMap;
     }
 }
