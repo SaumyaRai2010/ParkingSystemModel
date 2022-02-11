@@ -7,8 +7,6 @@ import model.ParkingVehicle;
 import model.VehicleType;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 
@@ -43,8 +41,9 @@ public class ParkingService {
                 parkingVehicle = parkingVehicleMap.get(key);
                 break;
             }
-
+            vehicleType.setOccupied(vehicleType.getOccupied()-1);
         }
+
         return parkingVehicle;
     }
 
@@ -52,12 +51,6 @@ public class ParkingService {
 
     public  void showParkingStatus() {
         System.out.println("Parking Status Is As Follows :");
-//        if (parkingVehicleList.size()==0) {
-//            return;
-//        }
-//        System.out.println("Bike : Total: "+ ParkingModelConfig.getMaxParking()+" Occupied: "+parkingVehicleList.get(0).size()+" Available: "+(ParkingModelConfig.getMaxParking()-parkingVehicleList.get(0).size()));
-//        System.out.println("SUV : Total: "+ ParkingModelConfig.getMaxParking()+" Occupied: "+parkingVehicleList.get(1).size()+" Available: "+(ParkingModelConfig.getMaxParking()-parkingVehicleList.get(1).size()));
-//        System.out.println("HatchBack : Total: "+ ParkingModelConfig.getMaxParking()+" Occupied: "+parkingVehicleList.get(2).size()+" Available: "+(ParkingModelConfig.getMaxParking()-parkingVehicleList.get(2).size()));
-    }
 
+        }
 }

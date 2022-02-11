@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class ParkingVehicle {
     private String vehicleNumber;
@@ -44,6 +45,10 @@ public class ParkingVehicle {
 
     public void setEnd(LocalDateTime end) {
         this.end = end;
+    }
+
+    public float getFinalCost(VehicleType vehicleType,LocalDateTime start, LocalDateTime end) {
+        return (end.getSecond()-start.getSecond())*vehicleType.getPerSecondPrice() +vehicleType.getBasePrice();
     }
 
 

@@ -65,9 +65,10 @@ public class ParkingMain {
                         break;
                     }
                     ParkingVehicle parkingVehicle = parkingService.removeParkingVehicle(VehicleType.values()[vehicleType-1]);
-//                    System.out.println("Vehicle number was : "+parkingVehicle.getVehicleNumber());
-//                    System.out.println("Entry time : "+parkingVehicle.getStart());
-//                    System.out.println("Exit time : "+parkingVehicle.getEnd());
+                    System.out.println("Vehicle number was : "+parkingVehicle.getVehicleNumber());
+                    System.out.println("Entry time : "+parkingVehicle.getStart());
+                    System.out.println("Exit time : "+parkingVehicle.getEnd());
+                    System.out.println("Final Cost : "+parkingVehicle.getFinalCost(VehicleType.values()[vehicleType-1],parkingVehicle.getStart(),parkingVehicle.getEnd()));
                     break;
                 case 4:
                     System.exit(0);
