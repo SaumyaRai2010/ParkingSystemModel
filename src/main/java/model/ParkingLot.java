@@ -7,7 +7,6 @@ import java.util.Map;
 
 
 public class ParkingLot {
-//    private List<List<ParkingVehicle>> parkingVehicleList;
     private Map<String,ParkingVehicle> parkingVehicleMap;
 
     public ParkingLot() {

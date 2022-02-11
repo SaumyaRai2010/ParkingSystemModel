@@ -7,11 +7,8 @@ import model.VehicleType;
 import service.ParkingService;
 
 import java.util.Scanner;
-import java.util.Vector;
 
-//todo ticket show : base price+ per second charge*(end time-start time) ceil value
-
-//todo show all vehicles list
+//todo show all given vehicle list
 public class ParkingMain {
 
     static ParkingService parkingService=new ParkingService();
@@ -28,7 +25,8 @@ public class ParkingMain {
             System.out.println("1. Show parking status");
             System.out.println("2. Park vehicle");
             System.out.println("3. Unpark vehicle");
-            System.out.println("4. Exit");
+            System.out.println("4. Show all vehicle list");
+            System.out.println("5. Exit");
             int ch= sc.nextInt();
             int vehicleType;
             sc.nextLine();
@@ -39,7 +37,7 @@ public class ParkingMain {
                 case 2:
                     System.out.println("Which Vehicle You Want To Add?");
                     for (VehicleType value : VehicleType.values()) {
-                        System.out.println(value.name());
+                        System.out.println(value.ordinal()+1+". "+value.name());
                     }
                     vehicleType=sc.nextInt();
                     sc.nextLine();
@@ -55,22 +53,41 @@ public class ParkingMain {
                     break;
 
                 case 3:
+//                    for (VehicleType value : VehicleType.values()) {
+//                        System.out.println(value.name());
+//                    }
+//                    vehicleType=sc.nextInt();
+//                    sc.nextLine();
+//                    if ( parkingService.isParkingSpaceEmpty(VehicleType.values()[vehicleType-1]) ) {
+//                        System.out.println("Parking Empty Already");
+//                        break;
+//                    }
+                    System.out.println("Please Enter Vehicle Number");
+                    String vehicleNumber=sc.nextLine();
+                    ParkingVehicle parkingVehicle = parkingService.removeParkingVehicle(vehicleNumber);
+                    if (parkingVehicle == null) {
+                        System.out.println("Vehicle Number Does Not Exist");
+                    }
+                    else {
+                        System.out.println("Vehicle number was : "+parkingVehicle.getVehicleNumber());
+                        System.out.println("Entry time : "+parkingVehicle.getStart());
+                        System.out.println("Exit time : "+parkingVehicle.getEnd());
+                        System.out.println("Final Cost : "+parkingVehicle.getFinalCost());
+                    }
+                    break;
+
+                case 4:
+                    System.out.println("Which Vehicle List You Want To See");
                     for (VehicleType value : VehicleType.values()) {
-                        System.out.println(value.name());
+                        System.out.println(value.ordinal()+1+". "+value.name());
                     }
                     vehicleType=sc.nextInt();
                     sc.nextLine();
-                    if ( parkingService.isParkingSpaceEmpty(VehicleType.values()[vehicleType-1]) ) {
-                        System.out.println("Parking Empty Already");
-                        break;
+                    for (ParkingVehicle vehicle: parkingService.getVehicleByType(VehicleType.values()[vehicleType-1])) {
+                        System.out.println("Number : "+vehicle.getVehicleNumber()+"            Start Time : "+vehicle.getStart());
                     }
-                    ParkingVehicle parkingVehicle = parkingService.removeParkingVehicle(VehicleType.values()[vehicleType-1]);
-                    System.out.println("Vehicle number was : "+parkingVehicle.getVehicleNumber());
-                    System.out.println("Entry time : "+parkingVehicle.getStart());
-                    System.out.println("Exit time : "+parkingVehicle.getEnd());
-                    System.out.println("Final Cost : "+parkingVehicle.getFinalCost(VehicleType.values()[vehicleType-1],parkingVehicle.getStart(),parkingVehicle.getEnd()));
                     break;
-                case 4:
+                case 5:
                     System.exit(0);
                 default:
                     System.out.printf("Please select a valid choice");

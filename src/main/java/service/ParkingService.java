@@ -7,6 +7,8 @@ import model.ParkingVehicle;
 import model.VehicleType;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 
@@ -28,29 +30,36 @@ public class ParkingService {
      }
 
     public void addParkingVehicle(String vehicleNumber,VehicleType vehicleType) {
-        ParkingVehicle parkingVehicle=new ParkingVehicle(vehicleNumber, LocalDateTime.now(), vehicleType.name());
+        ParkingVehicle parkingVehicle=new ParkingVehicle(vehicleNumber, LocalDateTime.now(), vehicleType);
         parkingVehicleMap.put(vehicleNumber,parkingVehicle);
         vehicleType.setOccupied(vehicleType.getOccupied()+1);
     }
 
-    public ParkingVehicle removeParkingVehicle(VehicleType vehicleType) {
-        ParkingVehicle parkingVehicle = null;
-        for (Map.Entry mapElement : parkingVehicleMap.entrySet()) {
-            String key = (String) mapElement.getKey();
-            if (parkingVehicleMap.get(key).getVehicleType() == vehicleType.name()) {
-                parkingVehicle = parkingVehicleMap.get(key);
-                break;
-            }
-            vehicleType.setOccupied(vehicleType.getOccupied()-1);
+    public ParkingVehicle removeParkingVehicle(String vehicleNumber) {
+        if ( !parkingVehicleMap.containsKey(vehicleNumber)) {
+            return null;
         }
-
+        ParkingVehicle parkingVehicle= parkingVehicleMap.remove(vehicleNumber);
+        parkingVehicle.setEnd(LocalDateTime.now());
+        parkingVehicle.getVehicleType().setOccupied(parkingVehicle.getVehicleType().getOccupied()-1);
         return parkingVehicle;
     }
 
-
-
     public  void showParkingStatus() {
         System.out.println("Parking Status Is As Follows :");
-
+        for (VehicleType value : VehicleType.values()) {
+            System.out.println(value.name()+" - Total : "+value.getParkingSize()+" Available : "+(value.getParkingSize()-value.getOccupied())+" Occupied : "+value.getOccupied());
         }
+        }
+
+    public List<ParkingVehicle> getVehicleByType(VehicleType vehicleType) {
+        List <ParkingVehicle> vehicleList =new ArrayList<>();
+        for (Map.Entry<String, ParkingVehicle> mapElement : parkingVehicleMap.entrySet()) {
+               if (mapElement.getValue().getVehicleType() == vehicleType) {
+                   vehicleList.add(mapElement.getValue());
+               }
+        }
+        return  vehicleList;
+    }
+
 }

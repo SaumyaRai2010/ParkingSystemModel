@@ -7,19 +7,19 @@ public class ParkingVehicle {
     private String vehicleNumber;
     private LocalDateTime start;
     private LocalDateTime end;
-    private String vehicleType;
+    private VehicleType vehicleType;
 
-    public ParkingVehicle(String vehicleNumber, LocalDateTime start, String vehicleType) {
+    public ParkingVehicle(String vehicleNumber, LocalDateTime start, VehicleType vehicleType) {
         this.vehicleNumber = vehicleNumber;
         this.start = start;
         this.vehicleType=vehicleType;
     }
 
-    public String getVehicleType() {
+    public VehicleType getVehicleType() {
         return vehicleType;
     }
 
-    public void setVehicleType(String vehicleType) {
+    public void setVehicleType(VehicleType vehicleType) {
         this.vehicleType = vehicleType;
     }
 
@@ -47,9 +47,10 @@ public class ParkingVehicle {
         this.end = end;
     }
 
-    public float getFinalCost(VehicleType vehicleType,LocalDateTime start, LocalDateTime end) {
-        return (end.getSecond()-start.getSecond())*vehicleType.getPerSecondPrice() +vehicleType.getBasePrice();
+    public float getFinalCost() {
+        return (this.end.getSecond()-this.start.getSecond())*this.vehicleType.getPerSecondPrice()
+                +this.vehicleType.getBasePrice();
     }
 
-
 }
+

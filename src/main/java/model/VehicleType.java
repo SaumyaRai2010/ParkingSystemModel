@@ -1,7 +1,9 @@
 package model;
 
 public enum VehicleType {
-    BIKE(0,0,25,10),SUV(0,0,50,10),HATCHBACK(0,0,100,10);
+    BIKE(0,0,25,10),
+    SUV(0,0,50,10),
+    HATCHBACK(0,0,100,10);
     private int parkingSize;
     private int occupied;
     private int basePrice;
